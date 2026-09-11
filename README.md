@@ -1,6 +1,6 @@
-# 
+# Docker and Containers
 
-
+From what a container actually is through Dockerfiles, networking, Compose, and cleanup — the day-to-day Docker skills that get real work done.
 
 Part of the [Yaaddi](https://github.com/yaaddi-courses) course catalog — a
 spaced-repetition flashcard course, ready to build and validate with the
