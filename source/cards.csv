@@ -11,215 +11,215 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 10,2,multiple_choice,exercise,7,What does a container avoid vs a VM?,Heavy overhead|Isolation|Portability,0,,,
 11,3,select_blank,preview,12,A containerized app runs the ___ everywhere.,same way|differently|randomly,0,cards/card_11.png,,
 12,3,multiple_choice,main,,What problem does bundling dependencies solve?,Inconsistent envs|Slow builds|Big images,0,,,
-13,3,true_false,exercise,12,A containerized app runs the same way everywhere.,,true,,,
-14,3,select_blank,exercise,12,Containers bundle the exact runtime and ___.,dependencies|hardware|network,0,,,
-15,3,multiple_choice,exercise,12,What did bundling dependencies fix?,Inconsistent envs|App size|Network speed,0,,,
-16,4,multiple_choice,preview,17,What actually runs your containers?,Docker daemon|Text editor|Web browser,0,cards/card_16.png,,
+13,3,true_false,exercise,12,A containerized app runs the same way everywhere.,,true,,,That's the whole point of containerization; it packages everything needed so that environment differences don't break your code and you get consistent behavior everywhere.
+14,3,select_blank,exercise,12,Containers bundle the exact runtime and ___.,dependencies|hardware|network,0,,,Containers package not only the necessary language runtime but also all the required supporting libraries and dependencies to ensure they function identically no matter where they run.
+15,3,multiple_choice,exercise,12,What did bundling dependencies fix?,Inconsistent envs|App size|Network speed,0,,,"Bundling dependencies was key because it solved the problem of 'it works on my machine,' which happens when environments are inconsistent due to missing or mismatched libraries."
+16,4,multiple_choice,preview,17,What actually runs your containers?,Docker daemon|Text editor|Web browser,0,cards/card_16.png,,"The actual execution is handled by the Docker daemon, which is the background service responsible for managing and running all your container instances."
 17,4,multiple_choice,main,,What runs your containers behind the scenes?,Docker daemon|Web browser|Text editor,0,,,"You control it with the docker command-line tool (the CLI), which talks to the daemon to run your commands."
-18,4,true_false,exercise,17,The docker command talks to the Docker daemon.,,true,,,
+18,4,true_false,exercise,17,The docker command talks to the Docker daemon.,,true,,,"Correct. When you type a `docker` command in your terminal (the client), it sends instructions over an API connection to the persistent background process, which is the daemon."
 19,4,select_blank,exercise,17,The Docker ___ actually runs your containers.,daemon|browser|editor,0,,,
 20,4,multiple_choice,exercise,17,What do you use to control Docker?,The CLI|Spreadsheet|Phone app,0,,,
 21,5,select_blank,preview,22,"In the class analogy, a container is an ___.",object|class|copy,0,,,
 22,5,multiple_choice,main,,What is a container relative to an image?,Running instance|Same thing|Backup copy,0,cards/card_22.png,,"Because an image is read-only, running it creates a container without ever changing the original image."
 23,5,true_false,exercise,22,An image is read-only.,,true,,,
 24,5,select_blank,exercise,22,An image is a ___ template for containers.,read-only|writable|deleted,0,,,
-25,5,multiple_choice,exercise,22,"In the class analogy, an image is a ___.",template|instance|copy,0,,,
-26,6,true_false,preview,27,docker run creates a new container.,,true,cards/card_26.png,,
-27,6,code_fill,main,,Complete: start a container from nginx.,docker ___ nginx|run,,,,
-28,6,select_blank,exercise,27,docker ___ starts a new container.,run|build|tag,0,,,
-29,6,multiple_choice,exercise,27,What does docker run create?,New container|New image|New network,0,,,
+25,5,multiple_choice,exercise,22,"In the class analogy, an image is a ___.",template|instance|copy,0,,,"An image is the blueprint, much like a class definition; it's the template that describes how something should be built. The actual running container you interact with is the instance."
+26,6,true_false,preview,27,docker run creates a new container.,,true,cards/card_26.png,,"That’s correct; when you run an image, Docker always provisions and starts a brand new, isolated container instance based on that blueprint."
+27,6,code_fill,main,,Complete: start a container from nginx.,docker ___ nginx|run,,,,You need to use `docker run` because this specific command tells Docker both to execute the process and which source image (nginx) to pull from.
+28,6,select_blank,exercise,27,docker ___ starts a new container.,run|build|tag,0,,,"The `run` command is specifically designed to take an existing image and execute it as a live container. Build creates images, while tag only names them."
+29,6,multiple_choice,exercise,27,What does docker run create?,New container|New image|New network,0,,,"Running an image always spins up a new, isolated container instance; it does not create a new image or modify networks by default."
 30,6,true_false,exercise,27,docker run starts a container from an existing image.,,true,,,That's the whole point of the command — turn an image into a running container.
-31,7,select_blank,preview,32,docker run ___ a missing image automatically.,pulls|skips|deletes,0,cards/card_31.png,,
+31,7,select_blank,preview,32,docker run ___ a missing image automatically.,pulls|skips|deletes,0,cards/card_31.png,,"When you specify an image that isn't on your machine, `docker run` will automatically pull it down from the registry before starting the container."
 32,7,select_blank,main,,docker run automatically ___ a missing image.,pulls|skips|renames|deletes,0,,,You never have to run docker pull first — docker run does it for you if needed.
-33,7,select_blank,exercise,32,"If the image isn't local, docker run ___ it.",pulls|deletes|renames,0,,,
-34,7,multiple_choice,exercise,32,What happens if you docker run an unpulled image?,Pulled automatically|It fails|Needs approval,0,,,
+33,7,select_blank,exercise,32,"If the image isn't local, docker run ___ it.",pulls|deletes|renames,0,,,"If Docker can't find the specified image locally, it is smart enough to automatically pull a copy from the configured registry so you can successfully execute it."
+34,7,multiple_choice,exercise,32,What happens if you docker run an unpulled image?,Pulled automatically|It fails|Needs approval,0,,,"Docker handles this seamlessly; if the image isn't local, it will automatically initiate a pull process from a registry before attempting to run anything."
 35,7,true_false,exercise,32,You must always run docker pull before docker run.,,false,,,docker run pulls automatically if the image is missing.
-36,8,true_false,preview,37,docker stop deletes the container permanently.,,false,cards/card_36.png,,
-37,8,multiple_choice,main,,What stops a running container?,docker stop|docker run|docker build,0,,,
+36,8,true_false,preview,37,docker stop deletes the container permanently.,,false,cards/card_36.png,,"This is false. `docker stop` simply sends a signal to gracefully halt the container, leaving it in an exited state so you can inspect or restart it later; use `docker rm` to delete it permanently."
+37,8,multiple_choice,main,,What stops a running container?,docker stop|docker run|docker build,0,,,"You must use `docker stop` to send a graceful shutdown signal to an active container. Remember that `docker run` starts containers, and `docker build` is used only for creating images."
 38,8,true_false,exercise,37,"docker stop leaves the container still on disk, not deleted.",,true,,,Stopping and removing are two separate steps.
-39,8,select_blank,exercise,37,docker ___ stops a running container.,stop|build|pull,0,,,
-40,8,multiple_choice,exercise,37,"After docker stop, is the container still there?",Still there|Gone instantly|Sometimes,0,,,
-41,9,multiple_choice,preview,42,What does docker rm do?,Deletes container|Starts container|Pauses container,0,cards/card_41.png,,
-42,9,code_fill,main,,Complete: delete a stopped container.,docker ___ mycontainer|rm,,,,
-43,9,true_false,exercise,42,docker rm removes a container.,,true,,,
-44,9,select_blank,exercise,42,docker ___ deletes a stopped container.,rm|run|pull,0,,,
-45,9,multiple_choice,exercise,42,What does docker rm -f do?,Force-removes it|Fails|Pauses only,0,,,
-46,10,true_false,preview,47,A container is created before it runs.,,true,cards/card_46.png,,
-47,10,multiple_choice,main,,What comes right after 'created'?,Running|Removed|Stopped,0,,,
-48,10,select_blank,exercise,47,The last lifecycle stage is ___.,removed|created|running,0,,,
+39,8,select_blank,exercise,37,docker ___ stops a running container.,stop|build|pull,0,,,"You use `docker stop` to gracefully shut down a running container by sending it a termination signal. Commands like `build` create images, and `pull` downloads them; neither stops an active process."
+40,8,multiple_choice,exercise,37,"After docker stop, is the container still there?",Still there|Gone instantly|Sometimes,0,,,"Yes, the container remains in your list of stopped containers because stopping only halts the running processes. To completely eliminate it from the system, you must run `docker rm`."
+41,9,multiple_choice,preview,42,What does docker rm do?,Deletes container|Starts container|Pauses container,0,cards/card_41.png,,The `docker rm` command permanently removes a container's metadata from your system entirely. Stopping or pausing only halts the process; only removing it deletes it.
+42,9,code_fill,main,,Complete: delete a stopped container.,docker ___ mycontainer|rm,,,,"You need to use the full syntax, which is `docker rm mycontainer`. Simply using just `rm` won't work because Docker needs the explicit command structure to know what you intend to delete."
+43,9,true_false,exercise,42,docker rm removes a container.,,true,,,That is correct; `docker rm` is the specific command designed to permanently delete containers that are no longer needed on your system.
+44,9,select_blank,exercise,42,docker ___ deletes a stopped container.,rm|run|pull,0,,,"You must use docker rm to delete a container that has finished running; 'run' is for starting containers, and 'pull' is only for downloading images."
+45,9,multiple_choice,exercise,42,What does docker rm -f do?,Force-removes it|Fails|Pauses only,0,,,"The -f flag forces the removal of a container, meaning it will stop any active processes and then delete the container instance immediately."
+46,10,true_false,preview,47,A container is created before it runs.,,true,cards/card_46.png,,"That's right; 'creating' a container just sets up its environment without executing anything, which is different from using 'run' to start it."
+47,10,multiple_choice,main,,What comes right after 'created'?,Running|Removed|Stopped,0,,,The lifecycle naturally progresses from created to running when you issue the command to start the process.
+48,10,select_blank,exercise,47,The last lifecycle stage is ___.,removed|created|running,0,,,Removal is the final stage because it means all data and metadata associated with that container have been completely deleted from your system.
 49,10,true_false,exercise,47,A container can be running before it's ever created.,,false,,,Created always comes first.
-50,10,multiple_choice,exercise,47,Which stage comes right before 'removed'?,Stopped|Created|Running,0,,,
-51,11,multiple_choice,preview,52,What is Docker Hub?,Image registry|Local folder|A firewall,0,cards/card_51.png,,
+50,10,multiple_choice,exercise,47,Which stage comes right before 'removed'?,Stopped|Created|Running,0,,,A container must be stopped before you can remove it from the system; attempting to delete a running or created container will fail.
+51,11,multiple_choice,preview,52,What is Docker Hub?,Image registry|Local folder|A firewall,0,cards/card_51.png,,"Docker Hub is the massive public repository where users store and share container images, essentially acting as a central library for Docker."
 52,11,code_fill,main,,Complete: download the redis image.,docker ___ redis|pull,,,,"Docker Hub is the public registry these ready-made images, like redis, come from by default."
-53,11,true_false,exercise,52,Docker Hub hosts ready-made images.,,true,,,
-54,11,select_blank,exercise,52,docker ___ downloads an image locally.,pull|push|run,0,,,
-55,11,true_false,exercise,52,"Docker Hub is a private, invitation-only registry.",,false,,,
-56,12,true_false,preview,57,Docker skips rebuilding unchanged layers.,,true,cards/card_56.png,,
+53,11,true_false,exercise,52,Docker Hub hosts ready-made images.,,true,,,"That's right; it functions as a huge catalog, allowing you to pull pre-built images for almost any application without having to build them yourself."
+54,11,select_blank,exercise,52,docker ___ downloads an image locally.,pull|push|run,0,,,"You use 'docker pull' specifically to download an image from a registry onto your local machine; 'run' starts the container, and 'push' uploads it."
+55,11,true_false,exercise,52,"Docker Hub is a private, invitation-only registry.",,false,,,"Docker Hub is actually a massive public registry, accessible to anyone who signs up for an account."
+56,12,true_false,preview,57,Docker skips rebuilding unchanged layers.,,true,cards/card_56.png,,"This is correct because Docker uses layer caching; if the instructions for a specific step haven't changed, it skips running those commands entirely."
 57,12,multiple_choice,main,,What does Docker cache during a build?,Unchanged layers|Every file|Net traffic,0,,,Skipping unchanged layers is what makes a rebuild so much faster than starting from scratch.
-58,12,true_false,exercise,57,An image is made of stacked layers.,,true,,,
-59,12,select_blank,exercise,57,Docker skips rebuilding ___ layers.,unchanged|random|all,0,,,
-60,12,multiple_choice,exercise,57,Why does layer caching help builds?,Faster rebuilds|Smaller network|More layers,0,,,
+58,12,true_false,exercise,57,An image is made of stacked layers.,,true,,,"Yes, that’s exactly right. An image is essentially a stack of read-only layers, each representing a set of changes or files added during the build process."
+59,12,select_blank,exercise,57,Docker skips rebuilding ___ layers.,unchanged|random|all,0,,,"Docker only needs to rebuild layers whose underlying instructions or source code have actually changed, which makes builds much faster than rebuilding everything."
+60,12,multiple_choice,exercise,57,Why does layer caching help builds?,Faster rebuilds|Smaller network|More layers,0,,,"Layer caching is all about efficiency; by reusing previous steps, Docker avoids running time-consuming commands that haven't been modified since the last build."
 61,13,true_false,preview,62,A Dockerfile is a plain text file.,,true,cards/card_61.png,,
-62,13,multiple_choice,main,,What is a Dockerfile?,Plain-text recipe|Running container|Network config,0,,,
+62,13,multiple_choice,main,,What is a Dockerfile?,Plain-text recipe|Running container|Network config,0,,,"A Dockerfile is essentially a plain-text script or recipe that contains instructions for building an image layer by layer. It doesn't run the container itself, but rather dictates how the container should be constructed."
 63,13,true_false,exercise,62,A Dockerfile is plain text.,,true,,,
-64,13,select_blank,exercise,62,A Dockerfile lists build ___ step by step.,instructions|containers|networks,0,,,
-65,13,multiple_choice,exercise,62,What does a Dockerfile describe?,Build steps|Running app|User account,0,,,
-66,14,select_blank,preview,67,___ sets a Dockerfile's base image.,FROM|CMD|COPY,0,cards/card_66.png,,
-67,14,multiple_choice,main,,What does FROM set?,Base image|The port|Username,0,,,
+64,13,select_blank,exercise,62,A Dockerfile lists build ___ step by step.,instructions|containers|networks,0,,,"The Dockerfile lists build instructions—like RUN or COPY—that dictate exactly how the image should be built from start to finish. It is a set of commands, not a list of running containers or network configurations."
+65,13,multiple_choice,exercise,62,What does a Dockerfile describe?,Build steps|Running app|User account,0,,,"It describes the entire sequence of build steps needed to create an immutable container image. While it results in an app and can define users, its sole purpose is describing the *process* of creation."
+66,14,select_blank,preview,67,___ sets a Dockerfile's base image.,FROM|CMD|COPY,0,cards/card_66.png,,"The FROM command must be used first because it specifies which existing base image (like Ubuntu or Alpine) your new custom image should start from. CMD and COPY handle commands and file transfers, respectively."
+67,14,multiple_choice,main,,What does FROM set?,Base image|The port|Username,0,,,FROM sets the foundational operating system or pre-built environment upon which all subsequent layers of your custom image will be added. It tells Docker what base layer to start with before any code is added.
 68,14,true_false,exercise,67,Every Dockerfile needs a FROM instruction.,,true,,,It sets the starting point everything else builds on.
 69,14,select_blank,exercise,67,___ sets the base image a Dockerfile builds on.,FROM|CMD|COPY,0,,,
 70,14,multiple_choice,exercise,67,What does FROM appear as in a Dockerfile?,Starting image|Final image|Running container,0,,,
 71,15,multiple_choice,preview,72,What does COPY do in a Dockerfile?,Adds files|Deletes files|Runs tests,0,,,
 72,15,multiple_choice,main,,What does COPY add to the image?,Your files|A network|A container,0,,,
 73,15,true_false,exercise,72,COPY adds files from your project into the image.,,true,,,
-74,15,select_blank,exercise,72,___ copies your files into the image.,COPY|CMD|FROM,0,,,
-75,15,multiple_choice,exercise,72,Where do COPY's source files come from?,Project folder|The internet|Another container,0,,,
-76,16,true_false,preview,77,RUN executes a command during the build.,,true,,,
-77,16,multiple_choice,main,,What does RUN do during a build?,Runs command|Starts container|Deletes layer,0,,,
-78,16,true_false,exercise,77,RUN executes while the image is being built.,,true,,,
-79,16,select_blank,exercise,77,___ runs a command during the build.,RUN|CMD|COPY,0,,,
-80,16,multiple_choice,exercise,77,What commonly runs via RUN?,Package install|App startup|Container stop,0,,,
-81,17,select_blank,preview,82,___ sets the command a container runs at startup.,CMD|RUN|COPY,0,,,
-82,17,select_blank,main,,___ sets what runs when the container starts.,CMD|COPY|EXPOSE|WORKDIR,0,,,
-83,17,select_blank,exercise,82,___ sets the startup command for a container.,CMD|RUN|FROM,0,,,
-84,17,multiple_choice,exercise,82,When does CMD's command actually run?,Container starts|While building|Never,0,,,
+74,15,select_blank,exercise,72,___ copies your files into the image.,COPY|CMD|FROM,0,,,"Use COPY when you need to take files from your current directory structure and bake them directly into the resulting image layer. CMD only defines a default command, while FROM specifies the base image."
+75,15,multiple_choice,exercise,72,Where do COPY's source files come from?,Project folder|The internet|Another container,0,,,COPY always pulls files from the build context—the directory where you run the Docker build command. It cannot pull directly from the internet or another container's filesystem.
+76,16,true_false,preview,77,RUN executes a command during the build.,,true,,,"That's right; RUN executes any specified command and commits those changes to a new, immutable layer in the image. This is how you install dependencies or compile code during the build process."
+77,16,multiple_choice,main,,What does RUN do during a build?,Runs command|Starts container|Deletes layer,0,,,"RUN is used specifically to execute shell commands that build up the image itself, creating new filesystem layers. It does not start a container; that happens later when you use `docker run`."
+78,16,true_false,exercise,77,RUN executes while the image is being built.,,true,,,Correct; RUN commands are executed sequentially by the Docker daemon *during* the image building process. They do not run when you start a container from that image.
+79,16,select_blank,exercise,77,___ runs a command during the build.,RUN|CMD|COPY,0,,,RUN executes commands that modify the filesystem and create a new layer during the build process. CMD is reserved for defining what happens when the container actually starts up.
+80,16,multiple_choice,exercise,77,What commonly runs via RUN?,Package install|App startup|Container stop,0,,,"RUN instructions are used for setup tasks that change the image, like installing packages or compiling code. App startup logic belongs in CMD or ENTRYPOINT."
+81,17,select_blank,preview,82,___ sets the command a container runs at startup.,CMD|RUN|COPY,0,,,CMD specifies the default command that will execute when a container is launched from the image. RUN executes commands only during the build phase.
+82,17,select_blank,main,,___ sets what runs when the container starts.,CMD|COPY|EXPOSE|WORKDIR,0,,,"CMD is the instruction used to define the primary executable or default command for the running container. COPY, EXPOSE, and WORKDIR handle file movement, port documentation, and directory setting, respectively."
+83,17,select_blank,exercise,82,___ sets the startup command for a container.,CMD|RUN|FROM,0,,,"CMD is the dedicated instruction for specifying the default startup command that runs at runtime. RUN executes commands during the build process, while FROM only specifies the base image."
+84,17,multiple_choice,exercise,82,When does CMD's command actually run?,Container starts|While building|Never,0,,,CMD only executes when you start an actual container instance from the image; it does not run while Docker is building the image itself.
 85,17,true_false,exercise,82,"CMD runs during the image build, not at startup.",,false,,,That's what RUN is for — CMD only fires when the container starts.
-86,18,true_false,preview,87,docker build turns a Dockerfile into an image.,,true,cards/card_86.png,,
+86,18,true_false,preview,87,docker build turns a Dockerfile into an image.,,true,cards/card_86.png,,"This is correct because the purpose of `docker build` is specifically to read the instructions in a Dockerfile and package them into an immutable, usable image format."
 87,18,code_fill,main,,Complete: build and tag an image.,docker ___ -t myapp .|build,,,,"The -t flag names (tags) the image, e.g. myapp, so you can find and run it later."
-88,18,true_false,exercise,87,docker build reads instructions from a Dockerfile.,,true,,,
-89,18,select_blank,exercise,87,docker ___ turns a Dockerfile into an image.,build|run|pull,0,,,
-90,18,multiple_choice,exercise,87,What does the -t flag do in docker build?,Names it|Deletes it|Runs it,0,,,
-91,19,multiple_choice,preview,92,Why use a multi-stage build?,Smaller image|Faster network|More layers,0,cards/card_91.png,,
+88,18,true_false,exercise,87,docker build reads instructions from a Dockerfile.,,true,,,"Yes, that's exactly what it does; the build command reads every instruction (like RUN or COPY) sequentially to construct all the necessary image layers."
+89,18,select_blank,exercise,87,docker ___ turns a Dockerfile into an image.,build|run|pull,0,,,"You must use `docker build` because that specific command is designed to read your Dockerfile instructions and create a new, usable image layer stack."
+90,18,multiple_choice,exercise,87,What does the -t flag do in docker build?,Names it|Deletes it|Runs it,0,,,"The -t flag tags your newly created image with a specific name (and optional version), which is crucial for referencing it later without using long IDs."
+91,19,multiple_choice,preview,92,Why use a multi-stage build?,Smaller image|Faster network|More layers,0,cards/card_91.png,,The primary benefit is creating a much smaller image because you can separate the large build environment from the minimal runtime environment.
 92,19,multiple_choice,main,,What does a multi-stage build reduce?,Final size|Build speed|Layer count,0,,,"It works by using an earlier stage to compile everything, then copying only the finished result into a leaner final stage."
-93,19,true_false,exercise,92,A multi-stage build can use two different stages.,,true,,,
-94,19,select_blank,exercise,92,The final stage only copies the ___ result.,finished|source|test,0,,,
-95,19,multiple_choice,exercise,92,Why leave build tools out of the final stage?,Smaller image|Faster tests|More layers,0,,,
-96,20,multiple_choice,preview,97,What does a tag like 1.2 identify?,One version|Any container|A network,0,cards/card_96.png,,
-97,20,multiple_choice,main,,What does an image tag identify?,A version|Container ID|A network,0,,,
-98,20,true_false,exercise,97,A tag like myapp:1.2 identifies a specific version.,,true,,,
-99,20,select_blank,exercise,97,A tag lets you ___ a specific version.,pin|delete|hide,0,,,
-100,20,multiple_choice,exercise,97,What can a version tag help you do?,Pin exactly|Randomize it|Hide it,0,,,
-101,21,true_false,preview,102,The latest tag always means the newest build.,,false,cards/card_101.png,,
+93,19,true_false,exercise,92,A multi-stage build can use two different stages.,,true,,,That's right; multi-stage builds are flexible and allow you to chain together as many distinct stages as needed for complex compilation processes.
+94,19,select_blank,exercise,92,The final stage only copies the ___ result.,finished|source|test,0,,,"The point of the final stage is isolation, so it should only copy the necessary compiled artifacts or finished binaries from previous steps."
+95,19,multiple_choice,exercise,92,Why leave build tools out of the final stage?,Smaller image|Faster tests|More layers,0,,,Build tools are temporary dependencies; leaving them out ensures that your resulting container image contains nothing extra and remains as small as possible.
+96,20,multiple_choice,preview,97,What does a tag like 1.2 identify?,One version|Any container|A network,0,cards/card_96.png,,"A tag specifies an exact, named release or iteration of the image, so 1.2 points to one particular version. It helps you track specific builds rather than pointing to a general network location."
+97,20,multiple_choice,main,,What does an image tag identify?,A version|Container ID|A network,0,,,"An image tag is essentially a label that points to a specific, immutable release or version of the container image. This allows developers to know exactly which build they are running."
+98,20,true_false,exercise,97,A tag like myapp:1.2 identifies a specific version.,,true,,,"That's correct; the format `image:tag` is specifically designed to pinpoint one exact, named release of an image, ensuring reproducibility."
+99,20,select_blank,exercise,97,A tag lets you ___ a specific version.,pin|delete|hide,0,,,"Tags are used to 'pin' an image, meaning you lock the container definition to a single, known version so it doesn't accidentally update when deployed later."
+100,20,multiple_choice,exercise,97,What can a version tag help you do?,Pin exactly|Randomize it|Hide it,0,,,"Tags allow you to pin an image to an exact, reproducible state. This is critical for production environments because it guarantees that the application runs the same way every single time."
+101,21,true_false,preview,102,The latest tag always means the newest build.,,false,cards/card_101.png,,"The 'latest' tag only means the most recently pushed image, not necessarily the newest build that was just created."
 102,21,select_blank,main,,The latest tag is just an ordinary ___.,tag|pointer|build|branch,0,,,latest is just an ordinary tag; it only moves when you rebuild and push it.
-103,21,select_blank,exercise,102,latest is just a regular ___ name.,tag|container|network,0,,,
-104,21,multiple_choice,exercise,102,When does the latest tag update?,On rebuild|Always|Never,0,,,
-105,21,true_false,exercise,102,Relying on latest in prod guarantees the newest code.,,false,,,
-106,22,true_false,preview,107,-p maps a host port to a container.,,true,cards/card_106.png,,
+103,21,select_blank,exercise,102,latest is just a regular ___ name.,tag|container|network,0,,,"In this context, 'latest' is simply a human-readable name (a tag) used to point to an image, much like any other version number."
+104,21,multiple_choice,exercise,102,When does the latest tag update?,On rebuild|Always|Never,0,,,The 'latest' tag only updates when you explicitly rebuild and push the image with that specific tag.
+105,21,true_false,exercise,102,Relying on latest in prod guarantees the newest code.,,false,,,"It does not guarantee anything; using a fixed, versioned tag is always safer for production environments because it ensures reproducibility."
+106,22,true_false,preview,107,-p maps a host port to a container.,,true,cards/card_106.png,,"Yes, the -p or --publish flag maps a specific port on your host machine to a port inside the running container."
 107,22,code_fill,main,,Complete: map host port 8080 to 80.,docker run ___ 8080:80 nginx|-p|--publish,,,,Container ports are closed off by default; -p (or its long form --publish) opens a specific mapping between a host port and a container port.
 108,22,true_false,exercise,107,Container ports are reachable by default.,,false,,,They are isolated until you explicitly map a port with -p.
-109,22,select_blank,exercise,107,The ___ flag maps a host port.,-p|-v|-e,0,,,
-110,22,multiple_choice,exercise,107,What does port mapping connect?,"Host, container|Two containers|Two images",0,,,
-111,23,true_false,preview,112,-e passes an environment variable at runtime.,,true,cards/card_111.png,,
+109,22,select_blank,exercise,107,The ___ flag maps a host port.,-p|-v|-e,0,,,The -p flag is used to publish or map a host port so that services running inside the container can be accessed from outside.
+110,22,multiple_choice,exercise,107,What does port mapping connect?,"Host, container|Two containers|Two images",0,,,Port mapping specifically connects a port on your physical machine (the host) to a port inside the isolated environment of the container.
+111,23,true_false,preview,112,-e passes an environment variable at runtime.,,true,cards/card_111.png,,"That's correct; using -e allows you to inject specific configuration variables into the running container, which is essential for many applications."
 112,23,code_fill,main,,Complete: set an env variable at run time.,docker run ___ KEY=value myapp|-e|--env,,,,This lets the same image behave differently in different environments without ever rebuilding it.
-113,23,true_false,exercise,112,Env vars let one image behave differently.,,true,,,
-114,23,select_blank,exercise,112,The ___ flag sets an env variable.,-e|-p|-v,0,,,
-115,23,multiple_choice,exercise,112,When is an env var passed in?,Run time|Build time|Never,0,,,
-116,24,true_false,preview,117,A bind mount links a host folder.,,true,cards/card_116.png,,
-117,24,multiple_choice,main,,What does a bind mount link to a container?,Host folder|Remote server|New image,0,,,
-118,24,true_false,exercise,117,A bind mount's data survives a container restart.,,true,,,
-119,24,select_blank,exercise,117,A bind mount links a host ___ directly.,folder|password|network,0,,,
+113,23,true_false,exercise,112,Env vars let one image behave differently.,,true,,,"Exactly. By passing different environment variables, you can make a single image run in multiple modes—for example, development vs. production."
+114,23,select_blank,exercise,112,The ___ flag sets an env variable.,-e|-p|-v,0,,,The -e flag is the correct option because it stands for 'environment' and is used to set specific key-value pairs as environment variables inside the container.
+115,23,multiple_choice,exercise,112,When is an env var passed in?,Run time|Build time|Never,0,,,"Environment variables must be passed at run time because they are configuration details that change when you start a specific instance of the container, not when the image is built."
+116,24,true_false,preview,117,A bind mount links a host folder.,,true,cards/card_116.png,,That's right; a bind mount explicitly links an existing directory from your host machine into the container's file system.
+117,24,multiple_choice,main,,What does a bind mount link to a container?,Host folder|Remote server|New image,0,,,"A bind mount always maps to a specific folder on the physical host machine, allowing the container to read and write directly to that external location."
+118,24,true_false,exercise,117,A bind mount's data survives a container restart.,,true,,,Because the data lives outside of the container—on the host system itself—the container can be stopped and restarted without losing any changes made to those files.
+119,24,select_blank,exercise,117,A bind mount links a host ___ directly.,folder|password|network,0,,,"A bind mount is used to map an entire directory structure from your host machine directly into the container, giving it access to that specific folder."
 120,24,multiple_choice,exercise,117,Where does a bind mount's data actually live?,On host|In image|Nowhere,0,,,
 121,25,true_false,preview,122,Docker manages a volume's storage for you.,,true,cards/card_121.png,,
 122,25,multiple_choice,main,,Who manages a volume's storage?,Docker|You manually|Kernel only,0,,,
 123,25,true_false,exercise,122,A volume's data is lost when its container is removed.,,false,,,That's the whole point of a volume — it outlives the container.
 124,25,select_blank,exercise,122,Docker ___ where a volume's data actually lives.,manages|deletes|ignores,0,,,
 125,25,multiple_choice,exercise,122,How does a volume differ from a bind mount?,Auto-managed|Never persists|Needs path,0,,,
-126,26,select_blank,preview,127,Containers on one network reach each other by ___.,name|luck|accident,0,cards/card_126.png,,
+126,26,select_blank,preview,127,Containers on one network reach each other by ___.,name|luck|accident,0,cards/card_126.png,,"Containers use internal DNS resolution, meaning you can address them by their configured name rather than needing to know a specific IP address."
 127,26,multiple_choice,main,,How can containers on one network reach each other?,By name|Just luck|Not directly,0,,,Every container gets its own network by default; a shared custom network is what lets them reach each other by name.
-128,26,true_false,exercise,127,Containers get their own network by default.,,true,,,
+128,26,true_false,exercise,127,Containers get their own network by default.,,true,,,"Yes, every container gets its own isolated network stack by default, which is crucial for maintaining security and resource separation."
 129,26,select_blank,exercise,127,Containers on a shared ___ can reach each other.,network|folder|tag,0,,,
-130,26,multiple_choice,exercise,127,What identifies a container on a network?,Its name|Its color|Its owner,0,,,
-131,27,true_false,preview,132,docker exec only works on a running container.,,true,cards/card_131.png,,
+130,26,multiple_choice,exercise,127,What identifies a container on a network?,Its name|Its color|Its owner,0,,,"The container's configured name acts as its unique hostname within the network, allowing other containers to find it via DNS resolution."
+131,27,true_false,preview,132,docker exec only works on a running container.,,true,cards/card_131.png,,"That's right; `exec` is designed to run new processes inside a container, so the target must be up and running for it to connect to."
 132,27,code_fill,main,,Complete: open a shell in mycontainer.,docker exec -it mycontainer ___|bash,,,,This only works on a container that's already running — exec attaches to it instead of starting a new one.
-133,27,true_false,exercise,132,docker exec works on an already-running container.,,true,,,
-134,27,select_blank,exercise,132,docker ___ opens a shell in a container.,exec|build|tag,0,,,
-135,27,multiple_choice,exercise,132,Why use exec instead of stopping the container?,Stays running|Deletes data|Rebuilds image,0,,,
-136,28,multiple_choice,preview,137,What does docker logs show?,Console output|Network config|Disk usage,0,cards/card_136.png,,
-137,28,code_fill,main,,Complete: view a container's logs.,docker ___ mycontainer|logs,,,,
-138,28,true_false,exercise,137,docker logs shows a container's console output.,,true,,,
-139,28,select_blank,exercise,137,docker ___ shows a container's output.,logs|build|tag,0,,,
-140,28,multiple_choice,exercise,137,When might you check docker logs?,See output|Delete it|Rename it,0,,,
-141,29,true_false,preview,142,docker inspect output is formatted as JSON.,,true,cards/card_141.png,,
-142,29,code_fill,main,,Complete: view a container's full config.,docker ___ mycontainer|inspect,,,,
-143,29,true_false,exercise,142,docker inspect output is JSON.,,true,,,
-144,29,select_blank,exercise,142,docker ___ returns a container's full configuration.,inspect|logs|tag,0,,,
-145,29,multiple_choice,exercise,142,What format does docker inspect use?,JSON|Plain text|CSV,0,,,
-146,30,true_false,preview,147,--memory caps how much RAM a container uses.,,true,cards/card_146.png,,
+133,27,true_false,exercise,132,docker exec works on an already-running container.,,true,,,"Yes, this is exactly what it does; you use `exec` to run new commands or shells inside a container that is already active and functioning."
+134,27,select_blank,exercise,132,docker ___ opens a shell in a container.,exec|build|tag,0,,,"You use docker exec when you need to run a new command, like opening an interactive shell, inside an already running container. Build is for creating images, and tag is just for naming them."
+135,27,multiple_choice,exercise,132,Why use exec instead of stopping the container?,Stays running|Deletes data|Rebuilds image,0,,,"`exec` allows you to run a command without interrupting the container's main process, so the service stays up and running normally. Stopping and restarting would cause unnecessary downtime."
+136,28,multiple_choice,preview,137,What does docker logs show?,Console output|Network config|Disk usage,0,cards/card_136.png,,It captures everything that was printed to standard output or standard error by the application running inside the container. Think of it as viewing the container's console feed.
+137,28,code_fill,main,,Complete: view a container's logs.,docker ___ mycontainer|logs,,,,"To see the output, you need to use the `docker logs` command followed by the container name or ID. The full syntax is `docker logs <container_id>`."
+138,28,true_false,exercise,137,docker logs shows a container's console output.,,true,,,That's correct; it is designed specifically to stream and display the standard output (stdout) and standard error (stderr) generated by the application running inside.
+139,28,select_blank,exercise,137,docker ___ shows a container's output.,logs|build|tag,0,,,"You use `docker logs` specifically to view the standard output stream of a running container; `build` relates to creating images, and `tag` is used for naming versions."
+140,28,multiple_choice,exercise,137,When might you check docker logs?,See output|Delete it|Rename it,0,,,"You check docker logs whenever you need to see what a container has printed out, which helps troubleshoot errors or track the execution flow of your application."
+141,29,true_false,preview,142,docker inspect output is formatted as JSON.,,true,cards/card_141.png,,"Yes, `docker inspect` returns a detailed dictionary of container metadata in JSON format, making it easy for scripts to programmatically parse specific values like IP addresses or volumes."
+142,29,code_fill,main,,Complete: view a container's full config.,docker ___ mycontainer|inspect,,,,"You need to use the `inspect` subcommand, so the full command is `docker inspect mycontainer`, which pulls all detailed configuration data for that container."
+143,29,true_false,exercise,142,docker inspect output is JSON.,,true,,,This is correct; `docker inspect` outputs a comprehensive JSON object containing every piece of metadata about the container or image you specify.
+144,29,select_blank,exercise,142,docker ___ returns a container's full configuration.,inspect|logs|tag,0,,,"The inspect command reads all metadata about a resource, giving you its full configuration in detail; logs only shows output streams, and tag is used for naming or versioning images."
+145,29,multiple_choice,exercise,142,What format does docker inspect use?,JSON|Plain text|CSV,0,,,"It outputs a detailed, structured dictionary of information in JSON format, which makes it incredibly easy for scripts and other programs to parse programmatically."
+146,30,true_false,preview,147,--memory caps how much RAM a container uses.,,true,cards/card_146.png,,That's correct; using the --memory flag sets an explicit hard limit on the amount of physical RAM that the container process is allowed to consume.
 147,30,multiple_choice,main,,What does --memory limit?,RAM usage|Disk space|Network speed,0,,,"A matching --cpus flag caps how much CPU the container can use, the same way --memory caps RAM."
-148,30,true_false,exercise,147,A resource limit can stop one container starving the host.,,true,,,
-149,30,select_blank,exercise,147,The ___ flag caps CPU usage.,--cpus|--memory|-p,0,,,
-150,30,multiple_choice,exercise,147,Why set resource limits on a container?,Prevent overuse|Speeds builds|More layers,0,,,
-151,31,true_false,preview,152,A restart policy can restart a crashed container.,,true,cards/card_151.png,,
+148,30,true_false,exercise,147,A resource limit can stop one container starving the host.,,true,,,This is true because resource controls like CPU and memory caps are designed specifically to prevent a single runaway or poorly coded container from consuming all host resources.
+149,30,select_blank,exercise,147,The ___ flag caps CPU usage.,--cpus|--memory|-p,0,,,"You must use the --cpus flag to set a specific limit on how much of the host's total CPU capacity the container can utilize; remember that --memory controls RAM, and -p is for port mapping."
+150,30,multiple_choice,exercise,147,Why set resource limits on a container?,Prevent overuse|Speeds builds|More layers,0,,,"Setting limits prevents a single container from monopolizing all available resources like CPU or memory, which could otherwise crash other services running on the same host."
+151,31,true_false,preview,152,A restart policy can restart a crashed container.,,true,cards/card_151.png,,"Yes, that is exactly what the restart policy does; if a process inside the container fails, the orchestrator will automatically attempt to bring it back online."
 152,31,multiple_choice,main,,What does a restart policy control?,Auto-restart behavior|Image size|Network speed,0,,,"You set this with the --restart flag, e.g. --restart unless-stopped."
-153,31,true_false,exercise,152,A restart policy can bring back a crashed container.,,true,,,
-154,31,select_blank,exercise,152,The ___ flag sets a restart policy.,--restart|--memory|-p,0,,,
-155,31,multiple_choice,exercise,152,When might a restart policy trigger?,After crash|On build|On pull,0,,,
-156,32,multiple_choice,preview,157,What can Compose start together?,Many containers|One container|Just images,0,cards/card_156.png,,
+153,31,true_false,exercise,152,A restart policy can bring back a crashed container.,,true,,,Correct. The primary purpose of the restart policy is maintaining uptime by automatically relaunching containers that exit unexpectedly or crash.
+154,31,select_blank,exercise,152,The ___ flag sets a restart policy.,--restart|--memory|-p,0,,,You need to use the --restart flag because it is the specific command parameter designed to define how and when a container should attempt to relaunch itself.
+155,31,multiple_choice,exercise,152,When might a restart policy trigger?,After crash|On build|On pull,0,,,"The policy only activates when the container process exits unexpectedly or crashes, which is its primary function for maintaining resilience against failure."
+156,32,multiple_choice,preview,157,What can Compose start together?,Many containers|One container|Just images,0,cards/card_156.png,,"Compose's main purpose is defining and running multiple, interconnected services at once. While it can run one container, its real power comes from managing the entire stack of many containers."
 157,32,multiple_choice,main,,What does Compose let you define together?,Multiple services|One image|One volume,0,,,"For example, an app and its database can be defined and started together instead of running separate docker run commands."
-158,32,true_false,exercise,157,Compose can start several containers with one command.,,true,,,
-159,32,select_blank,exercise,157,Compose defines related services in one ___.,file|network|volume,0,,,
-160,32,multiple_choice,exercise,157,What can Compose group in one file?,Multiple containers|One container|Nothing,0,,,
-161,33,true_false,preview,162,"Docker Compose files use JSON, not YAML.",,false,cards/card_161.png,,
+158,32,true_false,exercise,157,Compose can start several containers with one command.,,true,,,That's correct; you define all your related services in a single file and then use just one command to spin up the entire application stack.
+159,32,select_blank,exercise,157,Compose defines related services in one ___.,file|network|volume,0,,,"It uses a single configuration file, typically called `docker-compose.yml`, to define how all your related services should interact and what resources they need."
+160,32,multiple_choice,exercise,157,What can Compose group in one file?,Multiple containers|One container|Nothing,0,,,You use a single docker-compose.yml file to define and manage an entire application stack consisting of multiple interconnected services or containers.
+161,33,true_false,preview,162,"Docker Compose files use JSON, not YAML.",,false,cards/card_161.png,,"This is false; while it can technically handle other formats, the industry standard and recommended format for Docker Compose files is YAML."
 162,33,multiple_choice,main,,In docker-compose.yml what top-level key lists your containers?,services|volumes|networks,0,,,"docker-compose.yml is written in YAML; each entry under services can set its own image (or build path), ports, and env vars."
-163,33,true_false,exercise,162,A service can specify ports and env vars.,,true,,,
-164,33,select_blank,exercise,162,docker-compose.yml is written in ___ format.,YAML|JSON|CSV,0,,,
+163,33,true_false,exercise,162,A service can specify ports and env vars.,,true,,,"Yes, this is fundamental to containerization; you use these specifications to expose necessary ports and pass configuration variables into the running service."
+164,33,select_blank,exercise,162,docker-compose.yml is written in ___ format.,YAML|JSON|CSV,0,,,"It uses YAML (YAML Ain't Markup Language), which is designed to be highly readable for humans while still supporting complex data structures needed for defining services."
 165,33,multiple_choice,exercise,162,In docker-compose.yml what can a service build from?,Build path|User name|Tag color,0,,,
-166,34,true_false,preview,167,Compose services can reach each other by name.,,true,cards/card_166.png,,
+166,34,true_false,preview,167,Compose services can reach each other by name.,,true,cards/card_166.png,,"Absolutely; when you use Compose, it sets up a shared network that allows containers to resolve and communicate with each other using their defined service names."
 167,34,multiple_choice,main,,How does one Compose service reach another?,Service name|Random IP|Cannot reach,0,,,This works because Compose automatically puts every service on one shared network.
-168,34,true_false,exercise,167,Compose puts services on a shared network automatically.,,true,,,
-169,34,select_blank,exercise,167,A web service reaches db by its ___ name.,service|image|tag,0,,,
-170,34,multiple_choice,exercise,167,What does Compose set up between services automatically?,Shared network|Shared volume|Shared secrets,0,,,
-171,35,true_false,preview,172,A named volume can persist data in Compose.,,true,cards/card_171.png,,
-172,35,multiple_choice,main,,What can a named volume give a service?,Persistent data|Faster network|New image,0,,,"Compose services can each set their own env vars too, keeping config right alongside the service that needs it."
-173,35,true_false,exercise,172,Each service can set its own env vars in Compose.,,true,,,
-174,35,select_blank,exercise,172,A named ___ keeps data across restarts.,volume|tag|network,0,,,
-175,35,multiple_choice,exercise,172,Where does env config live in Compose?,Beside service|Separate app|Nowhere,0,,,
-176,36,multiple_choice,preview,177,What keeps an image small?,Slim base|Bloated base|Extra layers,0,cards/card_176.png,,
+168,34,true_false,exercise,167,Compose puts services on a shared network automatically.,,true,,,"That's correct; one of the major benefits is that Compose handles creating and attaching all your defined services to a single, shared network automatically."
+169,34,select_blank,exercise,167,A web service reaches db by its ___ name.,service|image|tag,0,,,"It must use the service name defined in your docker-compose.yml file, because that name acts as the hostname for internal container communication."
+170,34,multiple_choice,exercise,167,What does Compose set up between services automatically?,Shared network|Shared volume|Shared secrets,0,,,"Compose automatically sets up a shared network for all services defined in the file, allowing them to communicate with each other by service name. Volumes or secrets require explicit configuration."
+171,35,true_false,preview,172,A named volume can persist data in Compose.,,true,cards/card_171.png,,"Yes, named volumes are the standard way to ensure that data written by your containers persists even after they are stopped and removed. This is essential for maintaining application state."
+172,35,multiple_choice,main,,What can a named volume give a service?,Persistent data|Faster network|New image,0,,,"Named volumes provide persistent storage for a service's data, meaning the information survives container restarts regardless of how many times the container is rebuilt. They decouple critical data from the ephemeral nature of containers."
+173,35,true_false,exercise,172,Each service can set its own env vars in Compose.,,true,,,"That’s right; you can configure environment variables individually for each service, giving you precise control over what configuration each component receives."
+174,35,select_blank,exercise,172,A named ___ keeps data across restarts.,volume|tag|network,0,,,"Named volumes are specifically designed to store data outside the container's lifecycle, guaranteeing that your information persists across restarts. Tags and networks handle identification or connectivity, not persistent storage."
+175,35,multiple_choice,exercise,172,Where does env config live in Compose?,Beside service|Separate app|Nowhere,0,,,"In Compose, you define environment variables directly within the service block using the 'environment' key, rather than trying to set them globally or in a separate file."
+176,36,multiple_choice,preview,177,What keeps an image small?,Slim base|Bloated base|Extra layers,0,cards/card_176.png,,"Using a slim base image means you start with an operating system that only contains what is absolutely necessary, keeping your final image much smaller and more efficient than using bloated bases."
 177,36,multi_select,main,,Pick ways to keep an image small.,Slim base|Multi-stage build|Combined RUNs|Extra layers,0|1|2,,,All three make pulls faster and shrink the image's attack surface.
-178,36,true_false,exercise,177,A smaller image pulls faster.,,true,,,
-179,36,select_blank,exercise,177,A slim base image keeps the attack ___ small.,surface|log|network,0,,,
-180,36,multiple_choice,exercise,177,What can combining RUN commands reduce?,Layer count|Build time|Nothing,0,,,
-181,37,true_false,preview,182,A .dockerignore file excludes node_modules from builds.,,true,cards/card_181.png,,
+178,36,true_false,exercise,177,A smaller image pulls faster.,,true,,,This is true because the amount of data you have to download directly correlates with how long the pull process takes; less data means faster pulling.
+179,36,select_blank,exercise,177,A slim base image keeps the attack ___ small.,surface|log|network,0,,,"The 'attack surface' refers to the total number of exposed vulnerabilities or entry points, and by using a slim base, you eliminate unnecessary packages that could be exploited."
+180,36,multiple_choice,exercise,177,What can combining RUN commands reduce?,Layer count|Build time|Nothing,0,,,Every separate RUN instruction creates a distinct layer in your image history; combining related commands into one greatly reduces the total layer count.
+181,37,true_false,preview,182,A .dockerignore file excludes node_modules from builds.,,true,cards/card_181.png,,"Yes, because large directories like node_modules are often compiled or downloaded later in the process, so ignoring them keeps your build context clean and fast."
 182,37,multiple_choice,main,,What does .dockerignore exclude?,"Files, folders|Only images|Only volumes",0,,,"A common entry is node_modules, since it's large and gets reinstalled inside the image anyway."
 183,37,true_false,exercise,182,node_modules is a common .dockerignore entry.,,true,,,
-184,37,select_blank,exercise,182,.dockerignore keeps the build ___ fast.,context|network|volume,0,,,
-185,37,multiple_choice,exercise,182,What effect does .dockerignore have?,Faster builds|Slower builds|No change,0,,,
-186,38,true_false,preview,187,Secrets baked into an image can be read later.,,true,,,
-187,38,select_blank,main,,Secrets baked into an image can be ___ later.,read|encrypted|hidden|removed,0,cards/card_187.png,,
-188,38,multiple_choice,exercise,187,Why avoid baking secrets into an image?,Readable layers|Runs slower|Is illegal,0,,,
-189,38,select_blank,exercise,187,Secrets baked into an image live in its ___.,layers|logs|ports,0,,,
+184,37,select_blank,exercise,182,.dockerignore keeps the build ___ fast.,context|network|volume,0,,,.dockerignore drastically reduces the size of the build context that needs to be transferred and processed by the daemon when you run 'docker build'.
+185,37,multiple_choice,exercise,182,What effect does .dockerignore have?,Faster builds|Slower builds|No change,0,,,It makes your builds faster because it prevents unnecessary files and large directories from being included in the build context sent to Docker.
+186,38,true_false,preview,187,Secrets baked into an image can be read later.,,true,,,"That's correct; once secrets are baked into an image layer, they become part of that immutable history and can be extracted later using forensic tools."
+187,38,select_blank,main,,Secrets baked into an image can be ___ later.,read|encrypted|hidden|removed,0,cards/card_187.png,,"They can definitely be read because the secret becomes a permanent part of the image layer history, making it visible to anyone who inspects the image contents."
+188,38,multiple_choice,exercise,187,Why avoid baking secrets into an image?,Readable layers|Runs slower|Is illegal,0,,,"Baking secrets into an image means they become part of the immutable filesystem layers, making them difficult to manage and potentially visible if the image is inspected."
+189,38,select_blank,exercise,187,Secrets baked into an image live in its ___.,layers|logs|ports,0,,,The container image's layers are essentially a read-only snapshot of its entire filesystem; anything written there becomes permanently baked into those layers.
 190,38,true_false,exercise,187,Deleting a secret later removes it from the image.,,false,,,It can still be recovered from the earlier layer that added it.
-191,39,select_blank,preview,192,Containers run as ___ by default.,root|guest|nobody,0,,,
-192,39,multiple_choice,main,,Which user should containers run as when possible?,Non-root|Root|Admin,0,cards/card_192.png,,
-193,39,true_false,exercise,192,Containers run as root by default unless told otherwise.,,true,,,
-194,39,select_blank,exercise,192,Running as a ___ user limits damage from hacks.,non-root|admin|guest,0,,,
-195,39,multiple_choice,exercise,192,Why avoid running a container as root?,Limits reach|Less RAM|Faster builds,0,,,
-196,40,true_false,preview,197,"A minimal, trusted base image is safer.",,true,cards/card_196.png,,
-197,40,select_blank,main,,"A minimal, trusted base image is good ___ practice.",security|networking|logging|caching,0,,,
-198,40,select_blank,exercise,197,An untrusted base image can add ___.,vulnerabilities|discounts|colors,0,,,
-199,40,multiple_choice,exercise,197,What kind of base image is the safer choice?,"Minimal, well-maintained|Largest available|Unverified, random",0,,,
+191,39,select_blank,preview,192,Containers run as ___ by default.,root|guest|nobody,0,,,"By default, containers run with root privileges because the underlying system assumes maximum capability unless restricted otherwise."
+192,39,multiple_choice,main,,Which user should containers run as when possible?,Non-root|Root|Admin,0,cards/card_192.png,,"Running as a non-root user significantly limits the potential damage if an attacker manages to compromise the container, adhering to the principle of least privilege."
+193,39,true_false,exercise,192,Containers run as root by default unless told otherwise.,,true,,,"That's correct; containers default to root privileges, which is why explicitly setting a non-root user is such an important security measure."
+194,39,select_blank,exercise,192,Running as a ___ user limits damage from hacks.,non-root|admin|guest,0,,,"Running as a non-root user is safer because if an attacker compromises your application, they won't have the elevated permissions needed to damage the entire system."
+195,39,multiple_choice,exercise,192,Why avoid running a container as root?,Limits reach|Less RAM|Faster builds,0,,,"Running as root gives processes excessive privileges; if compromised, the attacker gains full control over the host machine, which is what running non-root users prevents."
+196,40,true_false,preview,197,"A minimal, trusted base image is safer.",,true,cards/card_196.png,,Using minimal and trusted base images reduces your attack surface by eliminating unnecessary tools and components that could contain vulnerabilities.
+197,40,select_blank,main,,"A minimal, trusted base image is good ___ practice.",security|networking|logging|caching,0,,,"Choosing a minimal, trusted base image is fundamentally a security practice because it limits the potential entry points for an attacker."
+198,40,select_blank,exercise,197,An untrusted base image can add ___.,vulnerabilities|discounts|colors,0,,,"Untrusted images might include hidden malware or unpatched software, which introduces vulnerabilities that you didn't intend to use."
+199,40,multiple_choice,exercise,197,What kind of base image is the safer choice?,"Minimal, well-maintained|Largest available|Unverified, random",0,,,Minimal and well-maintained base images are safest because they reduce the overall attack surface area by including only necessary components. Using larger or unverified images increases your exposure to vulnerabilities.
 200,40,true_false,exercise,197,Any image on Docker Hub is automatically safe.,,false,,,"Popularity isn't the same as trustworthiness — pick maintained, trusted sources."
-201,41,select_blank,preview,202,A ___ registry limits who can see an image.,private|public|open,0,cards/card_201.png,,
+201,41,select_blank,preview,202,A ___ registry limits who can see an image.,private|public|open,0,cards/card_201.png,,"A private registry is specifically designed to limit visibility, meaning only authorized users or teams can view the stored images. Public registries are meant for general access."
 202,41,multiple_choice,main,,What does a private registry restrict?,Image visibility|Build speed|Layer count,0,,,Docker Hub itself is public by default — a private registry is the alternative when you don't want that.
-203,41,true_false,exercise,202,Docker Hub images are public by default.,,true,,,
-204,41,true_false,exercise,202,A public registry limits who can see an image.,,false,,,
-205,41,multiple_choice,exercise,202,Who might use a private registry?,Company team|Whole internet|No one,0,,,
-206,42,select_blank,preview,207,docker ___ uploads a local image to a registry.,push|pull|build,0,cards/card_206.png,,
-207,42,code_fill,main,,Complete: upload myapp to a registry.,docker ___ myapp|push,,,,
-208,42,true_false,exercise,207,docker push uploads an image to a registry.,,true,,,
-209,42,select_blank,exercise,207,docker ___ uploads a local image.,push|pull|build,0,,,
-210,42,multiple_choice,exercise,207,What does docker pull do?,Downloads image|Deletes image|Builds image,0,,,
-211,43,true_false,preview,212,docker system prune frees up disk space.,,true,cards/card_211.png,,
+203,41,true_false,exercise,202,Docker Hub images are public by default.,,true,,,"That's correct; when you push an image to Docker Hub without specific settings, it is generally visible and accessible by anyone on the internet."
+204,41,true_false,exercise,202,A public registry limits who can see an image.,,false,,,"This is false because a public registry makes images available for everyone to pull. If you want limited access, you need a private registry."
+205,41,multiple_choice,exercise,202,Who might use a private registry?,Company team|Whole internet|No one,0,,,Companies use private registries to store proprietary or internal application images that should not be accessible by the general public.
+206,42,select_blank,preview,207,docker ___ uploads a local image to a registry.,push|pull|build,0,cards/card_206.png,,"You use `docker push` specifically when you want to send an image from your local machine up to a remote registry like Docker Hub. Remember that `pull` is for downloading, and `build` is for creating."
+207,42,code_fill,main,,Complete: upload myapp to a registry.,docker ___ myapp|push,,,,"To successfully upload your local image named `myapp` to a registry, you need to run the command: docker push myapp."
+208,42,true_false,exercise,207,docker push uploads an image to a registry.,,true,,,That is correct; `docker push` is exactly the command used to take an image you have locally and upload it so others can access it from a registry.
+209,42,select_blank,exercise,207,docker ___ uploads a local image.,push|pull|build,0,,,"When you want to send a completed image from your machine out to a remote registry, you must use `push`. The other commands are for downloading or creating images locally."
+210,42,multiple_choice,exercise,207,What does docker pull do?,Downloads image|Deletes image|Builds image,0,,,"`docker pull` is used to download a specific image from a registry, making it available on your local machine for use. It never deletes or builds an image."
+211,43,true_false,preview,212,docker system prune frees up disk space.,,true,cards/card_211.png,,"Yes, running `docker system prune` is essential because it cleans out unused resources like stopped containers and dangling images, freeing up disk space."
 212,43,code_fill,main,,Complete: clean up unused resources.,docker system ___|prune,,,,"Unused containers, networks, and images pile up over time until you clean them out."
-213,43,true_false,exercise,212,Unused Docker resources can pile up over time.,,true,,,
-214,43,select_blank,exercise,212,docker system prune frees up disk ___.,space|speed|ports,0,,,
-215,43,multiple_choice,exercise,212,What does prune remove?,Unused resources|Running containers|Every image,0,,,
-216,44,multiple_choice,preview,217,What does an orchestrator like Kubernetes do?,Manage containers|Write code|Design logos,0,cards/card_216.png,,
+213,43,true_false,exercise,212,Unused Docker resources can pile up over time.,,true,,,"That's correct; if you frequently stop or build images without cleaning up, orphaned containers and old layers can accumulate and consume significant disk space."
+214,43,select_blank,exercise,212,docker system prune frees up disk ___.,space|speed|ports,0,,,It frees up disk space by removing unused resources. It doesn't affect your network speed or allocated ports.
+215,43,multiple_choice,exercise,212,What does prune remove?,Unused resources|Running containers|Every image,0,,,Prune is designed to clean out only the unused components—like stopped containers and dangling images—and will never remove anything currently running.
+216,44,multiple_choice,preview,217,What does an orchestrator like Kubernetes do?,Manage containers|Write code|Design logos,0,cards/card_216.png,,"An orchestrator's main job is to manage the lifecycle of containers across a cluster, handling deployment and networking. It doesn't write code or design graphics; those are tasks for developers and designers."
 217,44,multiple_choice,main,,When do you typically need an orchestrator?,Many machines|One laptop|Never,0,,,"It automatically schedules, restarts, and scales containers across those machines for you."
-218,44,true_false,exercise,217,An orchestrator can restart failed containers automatically.,,true,,,
-219,44,select_blank,exercise,217,Kubernetes is an example of an ___.,orchestrator|image|registry,0,,,
-220,44,multiple_choice,exercise,217,What does an orchestrator automate?,"Scheduling, scaling|Writing Dockerfiles|Naming images",0,,,
-221,10,order,exercise,47,Put a container's lifecycle stages in order.,Created|Running|Stopped|Removed,,cards/card_221.png,,
+218,44,true_false,exercise,217,An orchestrator can restart failed containers automatically.,,true,,,"Yes, that’s one of its core functions—if a container fails due to an error, the orchestrator automatically detects it and spins up a replacement instance. This ensures your application stays running without manual intervention."
+219,44,select_blank,exercise,217,Kubernetes is an example of an ___.,orchestrator|image|registry,0,,,"Kubernetes is specifically designed to manage containers at scale, making it a type of orchestration system. It's not an image itself, nor is it just a place to store images (a registry)."
+220,44,multiple_choice,exercise,217,What does an orchestrator automate?,"Scheduling, scaling|Writing Dockerfiles|Naming images",0,,,Orchestrators automate the complex operational tasks like deciding where and when services should run (scheduling) and adjusting resources based on demand (scaling). Writing Dockerfiles or naming images are manual steps done before orchestration begins.
+221,10,order,exercise,47,Put a container's lifecycle stages in order.,Created|Running|Stopped|Removed,,cards/card_221.png,,"The lifecycle starts when an image is 'Created,' then becomes 'Running,' can be paused into 'Stopped,' and finally gets completely deleted when it is 'Removed.'"
 222,13,order,exercise,62,Put these Dockerfile instructions in order.,FROM|COPY|RUN|CMD,,cards/card_222.png,,"Every Dockerfile starts FROM a base image, then COPY adds files, RUN installs or builds, and CMD sets what launches the container."
-223,19,order,exercise,92,Put these multi-stage build steps in order.,Build stage compiles the app|Final stage copies only the built result,,cards/card_223.png,,
-224,42,order,exercise,207,Put these steps for shipping an image in order.,Build the image|Tag the image|Push the image to a registry,,cards/card_224.png,,
+223,19,order,exercise,92,Put these multi-stage build steps in order.,Build stage compiles the app|Final stage copies only the built result,,cards/card_223.png,,"You must first run the build stage to compile everything, and only after that is the final stage able to copy the necessary output into a clean image."
+224,42,order,exercise,207,Put these steps for shipping an image in order.,Build the image|Tag the image|Push the image to a registry,,cards/card_224.png,,"You must first build the image using a Dockerfile, then tag it with a version or repository name, and finally push that tagged image to your registry."
