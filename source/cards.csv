@@ -7,12 +7,12 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 6,2,true_false,preview,7,A container shares the host's kernel.,,true,cards/card_6.png,,
 7,2,multiple_choice,main,,What does a container share with the host?,OS kernel|IP address|Password,0,,,That's also why containers avoid the heavy overhead of a full guest OS the way a VM has — they start faster and use fewer resources.
 8,2,true_false,exercise,7,A container runs its own full operating system kernel.,,false,,,It shares the host's kernel instead — that's part of what keeps it lightweight.
-9,2,select_blank,exercise,7,A container is ___ from the host machine.,isolated|identical|merged,0,,,
+9,2,select_blank,exercise,7,A container runs ___ relative to the host machine.,isolated|identical|merged,0,,,
 10,2,multiple_choice,exercise,7,What does a container avoid vs a VM?,Heavy overhead|Isolation|Portability,0,,,
 11,3,select_blank,preview,12,A containerized app runs the ___ everywhere.,same way|differently|randomly,0,cards/card_11.png,,
 12,3,multiple_choice,main,,What problem does bundling dependencies solve?,Inconsistent envs|Slow builds|Big images,0,,,
 13,3,true_false,exercise,12,A containerized app runs the same way everywhere.,,true,,,That's the whole point of containerization; it packages everything needed so that environment differences don't break your code and you get consistent behavior everywhere.
-14,3,select_blank,exercise,12,Containers bundle the exact runtime and ___.,dependencies|hardware|network,0,,,Containers package not only the necessary language runtime but also all the required supporting libraries and dependencies to ensure they function identically no matter where they run.
+14,3,select_blank,exercise,12,Containers bundle the exact runtime and ___.,dependencies|hardware|colors,0,,,Containers package not only the necessary language runtime but also all the required supporting libraries and dependencies to ensure they function identically no matter the environment.
 15,3,multiple_choice,exercise,12,What did bundling dependencies fix?,Inconsistent envs|App size|Resource limits,0,,,"Bundling dependencies was key because it solved the problem of 'it works on my machine,' which happens when environments are inconsistent due to missing or mismatched libraries."
 16,4,multiple_choice,preview,17,What actually runs your containers?,Docker daemon|Text editor|Web browser,0,cards/card_16.png,,"The actual execution is handled by the Docker daemon, which is the background service responsible for managing and running all your container instances."
 17,4,multiple_choice,main,,What runs your containers behind the scenes?,Docker daemon|Web browser|Text editor,0,,,"You control it with the docker command-line tool (the CLI), which talks to the daemon to run your commands."
