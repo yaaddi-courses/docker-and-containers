@@ -67,6 +67,7 @@
     "Docker Hub and Private Registries",
     "Pushing and Pulling From a Registry",
     "Cleaning Up Unused Docker Resources",
-    "Why You'd Eventually Need an Orchestrator"
+    "Why You'd Eventually Need an Orchestrator",
+    "Recap: Key Terms"
   ]
 }

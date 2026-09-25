@@ -43,3 +43,4 @@ id,title,description,min_level,section,image,section_image
 42,Pushing and Pulling From a Registry,"Sharing an image with a teammate, a server, or the world.",1,Sharing Images,unit30.png,
 43,Cleaning Up Unused Docker Resources,"Reclaiming disk space from old images, stopped containers, and dangling volumes.",1,Housekeeping,unit31.png,
 44,Why You'd Eventually Need an Orchestrator,"What starts to break once you have more containers than one machine, setting up why Kubernetes exists.",1,What's Next,unit32.png,
+45,Recap: Key Terms,Quick matching practice that revisits the key terms from earlier decks.,1,Review,unit45.png,
