@@ -4,7 +4,7 @@
   "description": "From what a container actually is through Dockerfiles, networking, Compose, and cleanup — the day-to-day Docker skills that get real work done.",
   "image": "cover.png",
   "file": "docker-and-containers.zip",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "tags": [
     "docker",
     "devops",
@@ -21,6 +21,11 @@
       "version": "1.1.0",
       "date": "2026-09-24",
       "notes": "Rewrote 3 preview true/false card(s) whose answer was false, so every preview statement is true; Wrapped code, commands and file names in backticks so they render as code (54 card(s))."
+    },
+    {
+      "version": "1.1.1",
+      "date": "2026-09-30",
+      "notes": "Code mentioned inside question and answer text (commands, function calls, keywords such as for/None/True, file names, flags) is now marked as code, so it shows in the code font and colors."
     }
   ],
   "toc": [
