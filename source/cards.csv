@@ -1,28 +1,28 @@
 id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,explanation
-1,1,true_false,preview,2,A container packages everything an app needs.,,true,,,
-2,1,multiple_choice,main,,What does a container package together?,"App, deps|Just app|Whole OS",0,,,
+1,1,true_false,preview,2,A container packages everything an app needs.,,true,,,True. A container bundles the app together with the libraries and settings it needs to run.
+2,1,multiple_choice,main,,What does a container package together?,"App, deps|Just app|Whole OS",0,,,"A container packages the app and its dependencies together, so it does not rely on what is installed on the host."
 3,1,true_false,exercise,2,A container packages an app together with its dependencies.,,true,,,That's the whole idea — code and dependencies travel together as one unit.
-4,1,select_blank,exercise,2,A container bundles an app with its ___.,dependencies|hardware|connections,0,,,
-5,1,multiple_choice,exercise,2,What travels with the app inside a container?,Its dependencies|Host OS|Nothing extra,0,,,
-6,2,true_false,preview,7,A container shares the host's kernel.,,true,,,
+4,1,select_blank,exercise,2,A container bundles an app with its ___.,dependencies|hardware|connections,0,,,"A container bundles the app with its dependencies, the libraries and tools it needs to run."
+5,1,multiple_choice,exercise,2,What travels with the app inside a container?,Its dependencies|Host OS|Nothing extra,0,,,"Its dependencies travel with it, which is why the app runs the same wherever the container runs."
+6,2,true_false,preview,7,A container shares the host's kernel.,,true,,,True. Containers share the host's kernel instead of each running their own operating system.
 7,2,multiple_choice,main,,What does a container share with the host?,OS kernel|IP address|Password,0,,,That's also why containers avoid the heavy overhead of a full guest OS the way a VM has — they start faster and use fewer resources.
 8,2,true_false,exercise,7,A container runs its own full operating system kernel.,,false,,,It shares the host's kernel instead — that's part of what keeps it lightweight.
-9,2,select_blank,exercise,7,A container runs ___ relative to the host machine.,isolated|identical|merged,0,,,
-10,2,multiple_choice,exercise,7,What does a container avoid vs a VM?,Heavy overhead|Isolation|Portability,0,,,
-11,3,true_false,preview,12,A containerized app runs the same way everywhere.,,true,,,
-12,3,multiple_choice,main,,What problem does bundling dependencies solve?,Inconsistent envs|Slow builds|Big images,0,,,
+9,2,select_blank,exercise,7,A container runs ___ relative to the host machine.,isolated|identical|merged,0,,,"A container is isolated: its processes, files and network are separate from the host and from other containers."
+10,2,multiple_choice,exercise,7,What does a container avoid vs a VM?,Heavy overhead|Isolation|Portability,0,,,"Containers share the host's kernel, so they avoid the heavy overhead of a full guest operating system per VM."
+11,3,true_false,preview,12,A containerized app runs the same way everywhere.,,true,,,"True. Because everything it needs is inside, a container behaves the same on any machine that can run it."
+12,3,multiple_choice,main,,What problem does bundling dependencies solve?,Inconsistent envs|Slow builds|Big images,0,,,"Bundling dependencies fixes inconsistent environments, where an app works on one machine but breaks on another."
 13,3,true_false,exercise,12,Containers avoid 'works on my machine' problems.,,true,,,That's the whole point of containerization; it packages everything needed so that environment differences don't break your code and you get consistent behavior everywhere.
 14,3,select_blank,exercise,12,Containers bundle the exact runtime and ___.,dependencies|hardware|colors,0,,,Containers package not only the necessary language runtime but also all the required supporting libraries and dependencies to ensure they function identically no matter the environment.
 15,3,multiple_choice,exercise,12,What did bundling dependencies fix?,Inconsistent envs|App size|Resource limits,0,,,"Bundling dependencies was key because it solved the problem of 'it works on my machine,' which happens when environments are inconsistent due to missing or mismatched libraries."
 16,4,true_false,preview,17,The Docker daemon actually runs your containers.,,true,,,"The actual execution is handled by the Docker daemon, which is the background service responsible for managing and running all your container instances."
 17,4,multiple_choice,main,,What runs your containers behind the scenes?,Docker daemon|Web browser|Text editor,0,,,"You control it with the docker command-line tool (the CLI), which talks to the daemon to run your commands."
 18,4,true_false,exercise,17,The docker command talks to the Docker daemon.,,true,,,"Correct. When you type a `docker` command in your terminal (the client), it sends instructions over an API connection to the persistent background process, which is the daemon."
-19,4,select_blank,exercise,17,The Docker ___ actually runs your containers.,daemon|browser|editor,0,,,
-20,4,multiple_choice,exercise,17,What do you use to control Docker?,The CLI|Spreadsheet|Phone app,0,,,
-21,5,true_false,preview,22,"In the class analogy, a container is an object.",,true,,,
+19,4,select_blank,exercise,17,The Docker ___ actually runs your containers.,daemon|browser|editor,0,,,"The Docker daemon is the background service that builds, runs and manages your containers."
+20,4,multiple_choice,exercise,17,What do you use to control Docker?,The CLI|Spreadsheet|Phone app,0,,,"You control Docker with its command-line interface (CLI), by running commands such as `docker run`."
+21,5,true_false,preview,22,"In the class analogy, a container is an object.",,true,,,True. An image is like a class and a container is an object created from it.
 22,5,multiple_choice,main,,What is a container relative to an image?,Running instance|Same thing|Backup copy,0,,,"Because an image is read-only, running it creates a container without ever changing the original image."
-23,5,true_false,exercise,22,An image is read-only.,,true,,,
-24,5,select_blank,exercise,22,An image is a ___ template for containers.,read-only|writable|deleted,0,,,
+23,5,true_false,exercise,22,An image is read-only.,,true,,,True. An image is read-only; a running container adds its own writable layer on top.
+24,5,select_blank,exercise,22,An image is a ___ template for containers.,read-only|writable|deleted,0,,,An image is a read-only template that containers are created from.
 25,5,multiple_choice,exercise,22,"In the class analogy, an image is a ___.",template|instance|copy,0,,,"An image is the blueprint, much like a class definition; it's the template that describes how something should be built. The actual running container you interact with is the instance."
 26,6,true_false,preview,27,`docker run` creates a new container.,,true,,,"That’s correct; when you run an image, Docker always provisions and starts a brand new, isolated container instance based on that blueprint."
 27,6,code_fill,main,,Complete: start a container from nginx.,docker ___ nginx|run,,,,You need to use `docker run` because this specific command tells Docker both to execute the process and which source image (nginx) to pull from.
@@ -59,9 +59,9 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 58,12,true_false,exercise,57,An image is made of stacked layers.,,true,,,"Yes, that’s exactly right. An image is essentially a stack of read-only layers, each representing a set of changes or files added during the build process."
 59,12,select_blank,exercise,57,Docker skips rebuilding ___ layers.,unchanged|random|all,0,,,"Docker only needs to rebuild layers whose underlying instructions or source code have actually changed, which makes builds much faster than rebuilding everything."
 60,12,multiple_choice,exercise,57,Why does layer caching help builds?,Faster rebuilds|Fewer connections|More layers,0,,,"Layer caching is all about efficiency; by reusing previous steps, Docker avoids running time-consuming commands that haven't been modified since the last build."
-61,13,true_false,preview,62,A `Dockerfile` is a plain text file.,,true,,,
+61,13,true_false,preview,62,A `Dockerfile` is a plain text file.,,true,,,"True. A `Dockerfile` is ordinary text with build instructions, one per line."
 62,13,multiple_choice,main,,What is a `Dockerfile`?,Plain-text recipe|Running container|Network config,0,,,"A `Dockerfile` is essentially a plain-text script or recipe that contains instructions for building an image layer by layer. It doesn't run the container itself, but rather dictates how the container should be constructed."
-63,13,true_false,exercise,62,A `Dockerfile` is plain text.,,true,,,
+63,13,true_false,exercise,62,A `Dockerfile` is plain text.,,true,,,True. You can write it in any text editor because a `Dockerfile` is just plain text.
 64,13,select_blank,exercise,62,A `Dockerfile` lists build ___ step by step.,instructions|containers|networks,0,,,"The `Dockerfile` lists build instructions—like RUN or COPY—that dictate exactly how the image should be built from start to finish. It is a set of commands, not a list of running containers or network configurations."
 65,13,multiple_choice,exercise,62,What does a `Dockerfile` describe?,Build steps|Running app|User account,0,,,"It describes the entire sequence of build steps needed to create an immutable container image. While it results in an app and can define users, its sole purpose is describing the *process* of creation."
 66,14,true_false,preview,67,`FROM` sets a `Dockerfile`'s base image.,,true,,,"The FROM command must be used first because it specifies which existing base image (like Ubuntu or Alpine) your new custom image should start from. CMD and COPY handle commands and file transfers, respectively."
@@ -127,7 +127,7 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 126,26,true_false,preview,127,Containers on one network reach each other by name.,,true,,,"Containers use internal DNS resolution, meaning you can address them by their configured name rather than needing to know a specific IP address."
 127,26,multiple_choice,main,,How can containers on one network reach each other?,By name|Just luck|Not directly,0,,,Every container gets its own network by default; a shared custom network is what lets them reach each other by name.
 128,26,true_false,exercise,127,Containers get their own network by default.,,true,,,"Yes, every container gets its own isolated network stack by default, which is crucial for maintaining security and resource separation."
-129,26,select_blank,exercise,127,Containers on a shared ___ can reach each other.,network|folder|tag,0,,,
+129,26,select_blank,exercise,127,Containers on a shared ___ can reach each other.,network|folder|tag,0,,,"Containers attached to the same network can reach each other, usually by container name."
 130,26,multiple_choice,exercise,127,What identifies a container on a network?,Its name|Its color|Its owner,0,,,"The container's configured name acts as its unique hostname within the network, allowing other containers to find it via DNS resolution."
 131,27,true_false,preview,132,`docker exec` only works on a running container.,,true,,,"That's right; `exec` is designed to run new processes inside a container, so the target must be up and running for it to connect to."
 132,27,code_fill,main,,Complete: open a shell in mycontainer.,docker exec -it mycontainer ___|bash,,,,This only works on a container that's already running — exec attaches to it instead of starting a new one.
@@ -163,7 +163,7 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 162,33,multiple_choice,main,,In `docker-compose.yml` what top-level key lists your containers?,services|volumes|networks,0,,,"`docker-compose.yml` is written in YAML; each entry under services can set its own image (or build path), ports, and env vars."
 163,33,true_false,exercise,162,A service can specify ports and env vars.,,true,,,"Yes, this is fundamental to containerization; you use these specifications to expose necessary ports and pass configuration variables into the running service."
 164,33,select_blank,exercise,162,`docker-compose.yml` is written in ___ format.,YAML|JSON|CSV,0,,,"It uses YAML (YAML Ain't Markup Language), which is designed to be highly readable for humans while still supporting complex data structures needed for defining services."
-165,33,multiple_choice,exercise,162,In `docker-compose.yml` what can a service build from?,Build path|User name|Tag color,0,,,
+165,33,multiple_choice,exercise,162,In `docker-compose.yml` what can a service build from?,Build path|User name|Tag color,0,,,"A compose service can build from a build path, the folder containing the `Dockerfile`, instead of using a ready image."
 166,34,true_false,preview,167,Compose services can reach each other by name.,,true,,,"Absolutely; when you use Compose, it sets up a shared network that allows containers to resolve and communicate with each other using their defined service names."
 167,34,multiple_choice,main,,How does one Compose service reach another?,Service name|Random IP|Cannot reach,0,,,This works because Compose automatically puts every service on one shared network.
 168,34,true_false,exercise,167,Compose puts services on a shared network automatically.,,true,,,"That's correct; one of the major benefits is that Compose handles creating and attaching all your defined services to a single, shared network automatically."
@@ -181,7 +181,7 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 180,36,multiple_choice,exercise,177,What can combining RUN commands reduce?,Layer count|Build time|Nothing,0,,,Every separate RUN instruction creates a distinct layer in your image history; combining related commands into one greatly reduces the total layer count.
 181,37,true_false,preview,182,A .dockerignore file excludes node_modules from builds.,,true,,,"Yes, because large directories like node_modules are often compiled or downloaded later in the process, so ignoring them keeps your build context clean and fast."
 182,37,multiple_choice,main,,What does .dockerignore exclude?,"Files, folders|Only images|Only volumes",0,,,"A common entry is node_modules, since it's large and gets reinstalled inside the image anyway."
-183,37,true_false,exercise,182,node_modules is a common .dockerignore entry.,,true,,,
+183,37,true_false,exercise,182,node_modules is a common .dockerignore entry.,,true,,,"True. `node_modules` is big and rebuilt by `npm install`, so it is usually listed in `.dockerignore`."
 184,37,select_blank,exercise,182,.dockerignore keeps the build ___ fast.,context|network|volume,0,,,.dockerignore drastically reduces the size of the build context that needs to be transferred and processed by the daemon when you run '`docker build`'.
 185,37,multiple_choice,exercise,182,What effect does .dockerignore have?,Faster builds|Slower builds|No change,0,,,It makes your builds faster because it prevents unnecessary files and large directories from being included in the build context sent to Docker.
 186,38,true_false,preview,187,Secrets baked into an image can be read later.,,true,,,"That's correct; once secrets are baked into an image layer, they become part of that immutable history and can be extracted later using forensic tools."
@@ -220,7 +220,7 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 219,44,select_blank,exercise,217,Kubernetes is an example of an ___.,orchestrator|image|registry,0,,,"Kubernetes is specifically designed to manage containers at scale, making it a type of orchestration system. It's not an image itself, nor is it just a place to store images (a registry)."
 220,44,multiple_choice,exercise,217,What does an orchestrator automate?,"Scheduling, scaling|Writing Dockerfiles|Naming images",0,,,Orchestrators automate the complex operational tasks like deciding where and when services should run (scheduling) and adjusting resources based on demand (scaling). Writing Dockerfiles or naming images are manual steps done before orchestration begins.
 221,10,order,exercise,47,Put a container's lifecycle stages in order.,Created|Running|Stopped|Removed,,,,"The lifecycle starts when an image is 'Created,' then becomes 'Running,' can be paused into 'Stopped,' and finally gets completely deleted when it is 'Removed.'"
-222,13,order,exercise,62,Put these `Dockerfile` instructions in order.,FROM|COPY|RUN|CMD,,,,"Every `Dockerfile` starts FROM a base image, then COPY adds files, RUN installs or builds, and CMD sets what launches the container."
+222,13,order,exercise,62,"Put these `Dockerfile` instructions in order, first line first.",FROM|COPY|RUN|CMD,,,,"Every `Dockerfile` starts FROM a base image, then COPY adds files, RUN installs or builds, and CMD sets what launches the container."
 223,19,order,exercise,92,Put these multi-stage build steps in order.,Build stage compiles the app|Final stage copies only the built result,,,,"You must first run the build stage to compile everything, and only after that is the final stage able to copy the necessary output into a clean image."
 224,42,order,exercise,207,Put these steps for shipping an image in order.,Build the image|Tag the image|Push the image to a registry,,,,"You must first build the image using a `Dockerfile`, then tag it with a version or repository name, and finally push that tagged image to your registry."
 225,4,multiple_choice,exercise,17,What is the daemon's program called?,`dockerd`|`docker`|`compose`,0,,,`dockerd` is the background process that manages images and containers.
