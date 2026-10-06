@@ -234,3 +234,56 @@ id,unit_id,type,role,related_main_id,prompt,options,correct_index,image,audio,ex
 233,45,match_pairs,exercise,232,Pair every term with its gloss.,docker exec↔Run inside container|docker logs↔Show console output|docker inspect↔Full config JSON|restart policy↔Auto-restart rule,,,,Each term is paired with its plain-language meaning.
 234,45,match_pairs,exercise,232,Which meaning fits each term?,Docker Compose↔Multi-container definition|YAML↔Indented config format|build context↔Files for build|non-root user↔Limited-permission account,,,,Each term is paired with its plain-language meaning.
 235,45,match_pairs,exercise,232,Connect the terms to what they mean.,private registry↔Restricted image store|docker push↔Upload an image|docker system prune↔Remove unused resources|Kubernetes↔Container orchestrator,,,,Each term is paired with its plain-language meaning.
+236,1,multiple_choice,exam,,A container bundles an app with its:,Dependencies|Monitor|Warranty,0,,,"The container carries the app and what it needs, so it does not rely on the host."
+237,1,true_false,exam,,A container needs nothing installed on the host.,,false,,,It still needs a container engine; it just carries the app's own dependencies.
+238,2,multiple_choice,exam,,A container shares the host's:,Screen|Keyboard|Kernel,2,,,"Sharing the kernel avoids a full guest OS, so containers start fast."
+239,2,true_false,exam,,A virtual machine runs its own guest OS.,,true,,,That is the heavy overhead containers avoid.
+240,13,multiple_choice,exam,,Bundling dependencies fixes:,Large screens|Slow networks|Inconsistent environments,2,,,The app behaves the same on every machine.
+241,13,multiple_choice,exam,,The Docker daemon actually:,Runs containers|Hosts images|Writes Dockerfiles,0,,,"The CLI talks to the daemon, which actually runs the containers."
+242,4,true_false,exam,,The `docker` command-line tool talks to the daemon.,,true,,,The CLI sends your commands to the daemon.
+243,18,multiple_choice,exam,,A container is an image's:,Version tag|Running instance|Build recipe,1,,,A container is a running instance of a read-only image.
+244,5,true_false,exam,,Running an image changes the original image.,,false,,,The image is read-only; running it creates a container.
+245,28,multiple_choice,exam,,Which command starts a new container?,`docker run`|`docker rm`|`docker logs`,0,,,`docker run` creates and starts a container from an image.
+246,7,true_false,exam,,You must `docker pull` before every `docker run`.,,false,,,`docker run` pulls a missing image automatically.
+247,8,multiple_choice,exam,,`docker stop` sends a:,Build request|Pull request|Graceful shutdown,2,,,It asks the container to shut down but keeps it.
+248,8,true_false,exam,,`docker stop` deletes the container.,,false,,,The container is only stopped; `docker rm` deletes it.
+249,9,multiple_choice,exam,,Which command deletes a stopped container?,`docker pull`|`docker rm`|`docker stop`,1,,,`docker rm` removes the container.
+250,10,multiple_choice,exam,,Which state comes right after created?,Deleted|Pulled|Running,2,,,A container moves from created to running when it starts.
+251,11,multiple_choice,exam,,Docker Hub is a public:,Registry|Database|Compiler,0,,,Images like redis are pulled from this registry by default.
+252,12,multiple_choice,exam,,Docker rebuilds only the:,Base kernel|Unchanged layers|Changed layers,2,,,"Unchanged layers come from the cache, which makes rebuilds faster."
+253,12,true_false,exam,,Docker caches unchanged layers during a build.,,true,,,Skipping them makes a rebuild much faster.
+254,25,multiple_choice,exam,,A `Dockerfile` holds:,Build instructions|Running containers|Stored volumes,0,,,It is a plain-text recipe for building an image.
+255,18,multiple_choice,exam,,`FROM` sets the image's:,Final tag|Base image|Port number,1,,,Everything else is built on top of that base.
+256,15,multiple_choice,exam,,`COPY` adds what to the image?,Running logs|Network ports|Host files,2,,,It moves files such as source code into the image.
+257,16,multiple_choice,exam,,`RUN` executes a command:,While building|After pushing|Before pulling,0,,,It runs during the build and creates a new layer.
+258,16,true_false,exam,,`RUN` starts the container.,,false,,,Containers start with `docker run`; `RUN` works during the build.
+259,18,multiple_choice,exam,,`CMD` defines the container's:,Base image|Image tag|Default command,2,,,It sets what runs when the container starts.
+260,29,multiple_choice,exam,,Which command builds an image?,`docker build`|`docker exec`|`docker inspect`,0,,,`docker build` turns a `Dockerfile` into an image.
+261,18,true_false,exam,,The `-t` flag names (tags) the built image.,,true,,,It lets you find and run the image later.
+262,19,multiple_choice,exam,,A multi-stage build mainly shrinks the:,Base image|Host disk|Final image,2,,,Only the finished result is copied into the leaner final stage.
+263,20,multiple_choice,exam,,An image tag identifies a:,Version|Container|Network,0,,,A tag labels one specific release of the image.
+264,21,true_false,exam,,The `latest` tag is specially managed by Docker.,,false,,,It is an ordinary tag that only moves when you push it.
+265,22,multiple_choice,exam,,Which flag maps a host port?,`-e`|`-v`|`-p`,2,,,`-p` opens a mapping between a host port and a container port.
+266,23,multiple_choice,exam,,Which flag sets an environment variable?,`-p`|`-e`|`-d`,1,,,`-e` passes it at run time without rebuilding the image.
+267,24,multiple_choice,exam,,A bind mount links a:,Network|Host folder|Registry,1,,,The container reads and writes directly in that host location.
+268,25,multiple_choice,exam,,Who manages a volume's storage?,The registry|Docker|You,1,,,Docker handles the storage location and lifecycle for you.
+269,25,true_false,exam,,A named volume can outlive a container.,,true,,,Volumes persist data separately from the container.
+270,26,multiple_choice,exam,,Containers on one network reach each other:,By tag|By name|By colour,1,,,A shared custom network lets them use each other's names.
+271,42,multiple_choice,exam,,Which command opens a shell in a running container?,`docker build`|`docker push`|`docker exec`,2,,,`docker exec -it` attaches to a container that is already running.
+272,28,multiple_choice,exam,,Which command shows a container's console output?,`docker logs`|`docker rm`|`docker tag`,0,,,`docker logs` prints what the container wrote.
+273,29,multiple_choice,exam,,`docker inspect` prints its details as:,Tags|JSON|Images,1,,,It outputs the container's full configuration as JSON.
+274,30,multiple_choice,exam,,`--memory` limits a container's:,Disk|Ports|RAM,2,,,A matching `--cpus` flag limits CPU the same way.
+275,31,multiple_choice,exam,,A restart policy can restart a:,Crashed container|Stopped image|Closed registry,0,,,Set it with the `--restart` flag.
+276,32,multiple_choice,exam,,Compose starts many containers:,Slowly|Together|Separately,1,,,It defines and starts an app and its database in one go.
+277,33,multiple_choice,exam,,A Compose file is written in:,Python|Plain text|YAML,2,,,The `services` key lists your containers.
+278,34,true_false,exam,,Compose puts every service on one shared network.,,true,,,That shared network is why services can reach each other by name.
+279,35,multiple_choice,exam,,A named volume gives a service:,More ports|Persistent data|Faster CPU,1,,,The data survives container restarts and rebuilds.
+280,36,multiple_choice,exam,,Which keeps an image small?,Many layers|Extra tools|Slim base,2,,,A slim base image keeps pulls fast and the image small.
+281,37,multiple_choice,exam,,`.dockerignore` excludes files from the:,Build|Registry|Network,0,,,"A common entry is `node_modules`, which is large and reinstalled inside."
+282,38,true_false,exam,,A secret in an image layer stays visible.,,true,,,It remains in the layer history for anyone who inspects the image.
+283,39,multiple_choice,exam,,Containers should run as:,Non-root|Admin|Root,0,,,A non-root user limits the damage if the container is compromised.
+284,40,true_false,exam,,Minimal base images reduce an attacker's entry points.,,true,,,Fewer components mean fewer ways in.
+285,41,multiple_choice,exam,,A private registry restricts:,Image layers|Image visibility|Image size,1,,,Docker Hub is public by default; a private registry limits who sees images.
+286,42,multiple_choice,exam,,Which command uploads an image to a registry?,`docker push`|`docker run`|`docker pull`,0,,,`docker push` sends a local image to the registry.
+287,43,multiple_choice,exam,,`docker system prune` frees up:,Disk space|Network speed|Memory limits,0,,,"It removes unused containers, networks and images."
+288,44,multiple_choice,exam,,You eventually need an orchestrator for:,One file|Many machines|One laptop,1,,,"It schedules, restarts and scales containers across machines."
