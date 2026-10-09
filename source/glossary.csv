@@ -62,9 +62,9 @@ IDs,"Identifiers: unique names or numbers that pick out one thing, such as a con
 API,Application programming interface: a defined way for one program to ask another for something.,https://en.wikipedia.org/wiki/API,
 -v,The docker run flag that mounts a volume or host folder into a container so data outlives it.,https://docs.docker.com/engine/storage/volumes/,226
 CSV,Comma-separated values: a plain-text table format where each line is a row and commas separate the columns.,https://en.wikipedia.org/wiki/Comma-separated_values,145
-containers,"Isolated, lightweight environments that run an application together with everything it needs.",https://en.wikipedia.org/wiki/OS-level_virtualization,1
+containers,"Isolated, lightweight environments that run an application together with everything it needs.",https://docs.docker.com/get-started/docker-overview/,1
 images,"Read-only templates that contain an application and its dependencies, used to start Docker containers.",https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/,22
-layers,"The stacked, cached file changes that make up a Docker image, one per build instruction.",https://docs.docker.com/build/cache/,56
+layers,"The stacked, cached file changes that make up a Docker image, one per build instruction.",https://docs.docker.com/get-started/docker-concepts/building-images/understanding-image-layers/,56
 Dockerfiles,Text files listing the instructions Docker follows to build an image.,https://docs.docker.com/reference/dockerfile/,61
 COPYing,Using the Dockerfile COPY instruction to place files from your machine into an image.,https://docs.docker.com/reference/dockerfile/,21
 tags,Labels such as a version number that name a specific build of a Docker image.,https://docs.docker.com/reference/cli/docker/image/tag/,87
