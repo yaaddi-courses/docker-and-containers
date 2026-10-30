@@ -1,6 +1,6 @@
 # Building images, build context and multi-stage builds
 
-**Covers:** docker build, build context, multi-stage build
+**Covers:** docker build, build context, .dockerignore, node_modules, multi-stage build
 
 ## From recipe to image {#overview}
 Once you have a Dockerfile, a single command turns it into an image. Many people miss two things about it: what Docker actually sends in order to build, and how to avoid shipping your build tools to production. In this article we go through the command, the folder that travels with it, and a technique that makes the final image small.
@@ -13,7 +13,13 @@ Docker prints each step as it runs, and it marks the steps it took from the cach
 ## build context {#build-context}
 The build context is the set of files in the folder you pass to `docker build`. Docker sends them to the Docker daemon before the build starts, so that instructions such as COPY have something to take from. Everything in that folder is sent, whether or not the Dockerfile uses it.
 
-That makes a large folder a problem. If your project contains a 2 GB data folder or a `node_modules` directory, all of it is uploaded for each build, which is slow. It can also leak files into the image by accident. A file named `.dockerignore` lists patterns to leave out, such as `.git`, `node_modules`, `*.log` and secrets. Use one in every project.
+That makes a large folder a problem. If your project contains a 2 GB data folder or a `node_modules` directory, all of it is uploaded for each build, which is slow. It can also leak files into the image by accident. A `.dockerignore` file fixes this, as the next section shows.
+
+## .dockerignore {#dockerignore}
+A file named `.dockerignore` in the project root lists patterns for the build to leave out, one per line, in the same way that `.gitignore` does for Git. Typical entries are `.git`, `node_modules`, `*.log` and files with secrets. Leaving them out keeps the upload small and keeps secrets out of the image. Use one in every project.
+
+## node_modules {#node-modules}
+`node_modules` is the folder where a Node.js project keeps its installed packages. It is large, and `npm install` can rebuild it inside the image, so it is normally listed in `.dockerignore`. Copying your own copy in is also risky, because packages built for another operating system may not work in the image.
 
 ## multi-stage build {#multi-stage-build}
 A multi-stage build is a Dockerfile technique with two or more stages. One stage compiles or builds the application, with all its heavy build tools, and then you copy only the finished result into a clean, small final stage. Docker throws the first stage away, and only the last one becomes the image you ship.

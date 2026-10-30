@@ -73,3 +73,5 @@ networking,"How containers communicate with each other, the host and the outside
 networks,Virtual networks that Docker creates so chosen containers can reach each other by name.,https://docs.docker.com/engine/network/,62,container-networking#network
 Docker-Compose,The Docker tool that starts several containers together from one YAML file.,https://docs.docker.com/compose/,161,docker-compose#docker-compose-hyphen
 non-root users,"Accounts without administrator rights, used inside a container so a compromise can do less harm.",https://docs.docker.com/build/building/best-practices/,192,safer-and-leaner-images#non-root-user
+.dockerignore,"A file listing patterns that the build leaves out of the build context, such as node_modules or secrets.",https://docs.docker.com/build/concepts/context/#dockerignore-files,183,building-images-and-multi-stage#dockerignore
+node_modules,The folder where a Node.js project keeps its installed packages; it is usually kept out of an image.,https://docs.npmjs.com/cli/v10/configuring-npm/folders,183,building-images-and-multi-stage#node-modules
