@@ -1,0 +1,46 @@
+section,deck,pack,level,keywords,terms,kind,main_card_id
+Foundations,What a Container Actually Is,What does a container package together?,1,container,container,teach,2
+Foundations,Containers vs. Virtual Machines,What does a container share with the host?,1,kernel|VM,kernel|VM,teach,7
+Foundations,"Solving ""It Works on My Machine""",What problem does bundling dependencies solve?,1,What problem does bundling dependencies solve?,,teach,12
+Docker Basics,Installing Docker,What runs your containers behind the scenes?,1,Docker daemon|CLI|RUN,Docker daemon|CLI|RUN,teach,17
+Docker Basics,Images vs. Containers,What is a container relative to an image?,1,image|COPY,image|COPY,teach,22
+Docker Basics,Running Your First Container,Complete: start a container from nginx.,1,docker run|FROM,docker run|FROM,teach,27
+Docker Basics,docker run Pulls Images Automatically,docker run automatically ___ a missing image.,1,docker pull|registry,docker pull|registry,teach,32
+Docker Basics,Stopping a Running Container,What stops a running container?,1,docker stop|docker rm|docker build,docker stop|docker rm|docker build,teach,37
+Docker Basics,Removing a Container,Complete: delete a stopped container.,1,Complete: delete a stopped container.,,teach,42
+Docker Basics,A Container's Lifecycle,What comes right after 'created'?,1,What comes right after 'created'?,,teach,47
+Working With Images,Pulling Images From Docker Hub,Complete: download the redis image.,1,Docker Hub,Docker Hub,teach,52
+Working With Images,Image Layers and Caching,What does Docker cache during a build?,1,layer,layer,teach,57
+Working With Images,Writing Your First Dockerfile,What is a `Dockerfile`?,2,Dockerfile|CMD|network|base image,Dockerfile|CMD|network|base image,teach,62
+Working With Images,The FROM Instruction,What does FROM set?,2,What does FROM set?,,teach,67
+Working With Images,The COPY Instruction,What does COPY add to the image?,2,What does COPY add to the image?,,teach,72
+Working With Images,The RUN Instruction,What does RUN do during a build?,2,What does RUN do during a build?,,teach,77
+Working With Images,The CMD Instruction,___ sets what runs when the container starts.,2,___ sets what runs when the container starts.,,teach,82
+Working With Images,Building an Image,Complete: build and tag an image.,2,tag,tag,teach,87
+Working With Images,Multi-Stage Builds,What does a multi-stage build reduce?,2,multi-stage build,multi-stage build,teach,92
+Working With Images,Tagging and Versioning Images,What does an image tag identify?,2,What does an image tag identify?,,teach,97
+Working With Images,The 'latest' Tag Isn't Special,The latest tag is just an ordinary ___.,2,latest tag,latest tag,teach,102
+Running Containers Well,Mapping Ports,Complete: map host port 8080 to 80.,2,Complete: map host port 8080 to 80.,,teach,107
+Running Containers Well,Environment Variables in Containers,Complete: set an env variable at run time.,2,Complete: set an env variable at run time.,,teach,112
+Running Containers Well,Bind Mounts,What does a bind mount link to a container?,3,bind mount,bind mount,teach,117
+Running Containers Well,Volumes,Who manages a volume's storage?,3,volume,volume,teach,122
+Running Containers Well,Container Networking Basics,How can containers on one network reach each other?,3,How can containers on one network reach each other?,,teach,127
+Running Containers Well,Getting a Shell Inside a Running Container,Complete: open a shell in mycontainer.,3,docker exec,docker exec,teach,132
+Managing Containers,Reading Container Logs,Complete: view a container's logs.,3,docker logs,docker logs,teach,137
+Managing Containers,Inspecting a Container,Complete: view a container's full config.,3,docker inspect,docker inspect,teach,142
+Managing Containers,Setting Resource Limits,What does `--memory` limit?,3,What does `--memory` limit?,,teach,147
+Managing Containers,Restart Policies,What does a restart policy control?,3,restart policy|orchestrator,restart policy|orchestrator,teach,152
+Multi-Container Apps,Why You Need Docker Compose,What does Compose let you define together?,3,services,services,teach,157
+Multi-Container Apps,Writing a docker-compose.yml,In `docker-compose.yml` what top-level key lists your contai,3,Docker Compose|docker-compose.yml|YAML,Docker Compose|docker-compose.yml|YAML,teach,162
+Multi-Container Apps,Networking Between Compose Services,How does one Compose service reach another?,3,How does one Compose service reach another?,,teach,167
+Multi-Container Apps,Compose Volumes and Config,What can a named volume give a service?,4,What can a named volume give a service?,,teach,172
+Image Best Practices,Keeping Images Small,Pick ways to keep an image small.,4,attack surface,attack surface,teach,177
+Image Best Practices,Using .dockerignore,What does .dockerignore exclude?,4,build context,build context,teach,182
+Image Best Practices,Avoiding Baked-In Secrets,Secrets baked into an image can be ___ later.,4,Secrets baked into an image can be ___ later.,,teach,187
+Image Best Practices,Run as a Non-Root User,Which user should containers run as when possible?,4,non-root user,non-root user,teach,192
+Image Best Practices,Use Trusted Base Images,"A minimal, trusted base image is good ___ practice.",4,"A minimal, trusted base image is good ___ practice.",,teach,197
+Sharing Images,Docker Hub and Private Registries,What does a private registry restrict?,4,private registry,private registry,teach,202
+Sharing Images,Pushing and Pulling From a Registry,Complete: upload myapp to a registry.,4,docker push,docker push,teach,207
+Housekeeping,Cleaning Up Unused Docker Resources,Complete: clean up unused resources.,4,docker system prune,docker system prune,teach,212
+What's Next,Why You'd Eventually Need an Orchestrator,When do you typically need an orchestrator?,4,Kubernetes,Kubernetes,teach,217
+Review,Recap: Key Terms,Recap pack 45,4,VM|CLI|docker stop|latest tag|docker exec|docker logs|docker inspect|restart policy|Docker Compose|YAML|build context|non-root user|private registry|docker push|docker system prune|Kubernetes,,review,232
